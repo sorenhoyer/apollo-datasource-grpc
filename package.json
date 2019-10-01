@@ -6,9 +6,10 @@
   "module": "dist/module/index.js",
   "types": "dist/main/index.d.ts",
   "scripts": {
-    "clean": "npx rimraf dist",
+    "build": "npm run clean && npm run build-main && npm run build-module",
     "build-main": "npx tsc -p tsconfig.json",
     "build-module": "npx tsc -p tsconfig.module.json",
+    "clean": "npx rimraf dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
