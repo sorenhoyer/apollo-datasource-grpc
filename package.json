@@ -1,0 +1,37 @@
+{
+  "name": "apollo-datasource-grpc",
+  "version": "1.0.0",
+  "description": "gRPC implementation of Apollo Server's Datasources. Makes it possible to use Partial Query Caching",
+  "main": "dist/main/index.js",
+  "module": "dist/module/index.js",
+  "types": "dist/main/index.d.ts",
+  "scripts": {
+    "clean": "npx rimraf dist",
+    "build-main": "npx tsc -p tsconfig.json",
+    "build-module": "npx tsc -p tsconfig.module.json",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sorenhoyer/apollo-datasource-grpc.git"
+  },
+  "keywords": [
+    "apollo",
+    "apollo-datasource",
+    "apollo-datasource-grpc",
+    "grpc"
+  ],
+  "author": "Søren Høyer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sorenhoyer/apollo-datasource-grpc/issues"
+  },
+  "homepage": "https://github.com/sorenhoyer/apollo-datasource-grpc#readme",
+  "devDependencies": {
+    "@types/node": "^12.7.8",
+    "typescript": "^3.6.3"
+  },
+  "dependencies": {
+    "apollo-datasource": "^0.6.3"
+  }
+}
