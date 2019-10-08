@@ -30,6 +30,8 @@
   "homepage": "https://github.com/sorenhoyer/apollo-datasource-grpc#readme",
   "devDependencies": {
     "@types/node": "^12.7.8",
+    "apollo-cache-control": "^0.8.4",
+    "graphql": "^14.5.8",
     "typescript": "^3.6.3"
   },
   "dependencies": {

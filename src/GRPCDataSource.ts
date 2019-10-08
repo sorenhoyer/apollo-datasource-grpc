@@ -1,5 +1,6 @@
 import { DataSource, DataSourceConfig } from 'apollo-datasource';
 import crypto from 'crypto';
+import { GraphQLResolveInfo } from 'graphql';
 import GRPCCache from './GRPCCache';
 
 abstract class GRPCDataSource<TContext = any> extends DataSource {
@@ -16,8 +17,27 @@ abstract class GRPCDataSource<TContext = any> extends DataSource {
     this.cache = new GRPCCache(config.cache);
   }
 
-  async callRPC(ttl = 5, request: any, fnTransformResponseData?: any) {
-    const cacheKey = this.getCacheKey(request.args, request.rpcName);
+  async callRPC(request: any, info?: GraphQLResolveInfo, fnTransformResponseData?: any) {
+    let path;
+    let maxAge = 0;
+    let scope = 'PUBLIC';
+
+    if (info) {
+      path = info.path;
+
+      if (info.cacheControl && info.cacheControl.cacheHint) {
+        if (info.cacheControl.cacheHint.maxAge) maxAge = info.cacheControl.cacheHint.maxAge;
+        if (info.cacheControl.cacheHint.scope) scope = info.cacheControl.cacheHint.scope;
+      }
+    }
+
+    const cacheKey = this.generateCacheKey({
+      ...request.args,
+      ...path,
+      rpcName: request.rpcName,
+      maxAge,
+      scope,
+    });
 
     const entry = await this.cache.get(cacheKey);
 
@@ -32,10 +52,10 @@ abstract class GRPCDataSource<TContext = any> extends DataSource {
 
         if (fnTransformResponseData) {
           const res = fnTransformResponseData(response);
-          this.cache.set(cacheKey, res, ttl);
+          this.cache.set(cacheKey, res, maxAge);
           resolve(res);
         } else {
-          this.cache.set(cacheKey, response, ttl);
+          this.cache.set(cacheKey, response, maxAge);
           resolve(response);
         }
       });
@@ -44,10 +64,10 @@ abstract class GRPCDataSource<TContext = any> extends DataSource {
     return response;
   }
 
-  getCacheKey(args: any, rpcName: string) {
+  generateCacheKey(obj: any) {
     return crypto
       .createHash("sha1")
-      .update(JSON.stringify(args + rpcName))
+      .update(JSON.stringify(obj))
       .digest("base64");
   }
 }
