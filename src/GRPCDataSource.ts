@@ -47,7 +47,7 @@ abstract class GRPCDataSource<TContext = any> extends DataSource {
   getCacheKey(args: any, rpcName: string) {
     return crypto
       .createHash("sha1")
-      .update(JSON.stringify(args + rpcName))
+      .update(JSON.stringify(args) + rpcName)
       .digest("base64");
   }
 }
