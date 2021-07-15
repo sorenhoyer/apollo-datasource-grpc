@@ -6,9 +6,9 @@
   "module": "dist/module/index.js",
   "types": "dist/main/index.d.ts",
   "scripts": {
-    "build": "npm run clean && npm run build-main && npm run build-module",
-    "build-main": "npx tsc -p tsconfig.json",
-    "build-module": "npx tsc -p tsconfig.module.json",
+    "build": "yarn clean && yarn build-main && yarn build-module",
+    "build-main": "yarn tsc -p tsconfig.json",
+    "build-module": "yarn tsc -p tsconfig.module.json",
     "clean": "npx rimraf dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -29,8 +29,8 @@
   },
   "homepage": "https://github.com/sorenhoyer/apollo-datasource-grpc#readme",
   "devDependencies": {
-    "@types/node": "^12.7.8",
-    "typescript": "^3.6.3"
+    "@types/node": "^16.3.2",
+    "typescript": "^4.3.5"
   },
   "dependencies": {
     "apollo-datasource": "^0.6.3"

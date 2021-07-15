@@ -6,7 +6,7 @@ gRPC implementation of Apollo Server's Datasources. Makes it possible to use Par
 To get started, install the apollo-datasource-grpc package:
 
 ```
-npm i apollo-datasource-grpc
+yarn apollo-datasource-grpc
 ```
 To define a data source, extend the GRPCDataSource class 
 
