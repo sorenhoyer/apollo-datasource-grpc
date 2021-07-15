@@ -1,6 +1,6 @@
 {
   "name": "apollo-datasource-grpc",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "gRPC implementation of Apollo Server's Datasources. Makes it possible to use Partial Query Caching",
   "main": "dist/main/index.js",
   "module": "dist/module/index.js",
